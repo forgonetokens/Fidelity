@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUESOS — The Bones of the One You Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1a1a;
+  --bg-deep: #111010;
+  --text: #F5F0E8;
+  --text-muted: #a89e8e;
+  --bone: #E8DCC8;
+  --marigold: #E8890C;
+  --marigold-dark: #D4760A;
+  --marigold-dim: rgba(232, 137, 12, 0.15);
+  --purple: #4A1942;
+  --purple-light: #6B2D6B;
+  --gold: #C9A84C;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --max-w: 860px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===================== COBBLESTONE TEXTURE ===================== */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.022;
+  background:
+    radial-gradient(ellipse 28px 24px at 30px 28px, #a89070 0%, transparent 100%),
+    radial-gradient(ellipse 32px 26px at 80px 22px, #9a8060 0%, transparent 100%),
+    radial-gradient(ellipse 26px 22px at 55px 60px, #a88e6e 0%, transparent 100%),
+    radial-gradient(ellipse 30px 28px at 110px 55px, #8a7050 0%, transparent 100%),
+    radial-gradient(ellipse 34px 24px at 10px 70px, #907858 0%, transparent 100%),
+    radial-gradient(ellipse 28px 26px at 140px 30px, #a08468 0%, transparent 100%),
+    radial-gradient(ellipse 30px 22px at 135px 72px, #968060 0%, transparent 100%);
+  background-size: 160px 90px;
+}
+
+body > *:not(script) { position: relative; z-index: 1; }
+
+::selection {
+  background: var(--marigold);
+  color: var(--bg);
+}
+
+/* ===================== TYPOGRAPHY ===================== */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2.4rem;
+  color: var(--marigold);
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+h3 {
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+  color: var(--bone);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p { margin-bottom: 1rem; }
+
+strong { color: var(--text); font-weight: 600; }
+
+em, .note { font-family: var(--font-display); font-style: italic; color: var(--bone); }
+
+a {
+  color: var(--marigold);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover { color: var(--gold); }
+
+/* ===================== LAYOUT ===================== */
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 5rem 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  opacity: 1;
+  transform: none;
+  background: radial-gradient(ellipse at 50% 60%, rgba(232, 137, 12, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 50% 40%, rgba(74, 25, 66, 0.1) 0%, transparent 50%),
+              var(--bg-deep);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -55%);
+  background: radial-gradient(circle, rgba(232, 137, 12, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-shadow: 0 0 80px rgba(232, 137, 12, 0.25), 0 0 160px rgba(232, 137, 12, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-skull {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  display: block;
+  margin-top: 0.5rem;
+  opacity: 0.6;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: var(--bone);
+  margin-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-meta {
+  margin-top: 2.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 2;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: pulse-down 2s ease-in-out infinite;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--marigold);
+  margin: 0.5rem auto 0;
+  opacity: 0.5;
+}
+
+@keyframes pulse-down {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.8; transform: translateX(-50%) translateY(6px); }
+}
+
+/* ===================== NAV ===================== */
+.side-nav {
+  position: fixed;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.side-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.2rem 0;
+}
+
+.side-nav .nav-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.25s, transform 0.25s;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.side-nav a:hover .nav-label,
+.side-nav a.active .nav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.side-nav .nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.side-nav a:hover .nav-dot,
+.side-nav a.active .nav-dot {
+  background: var(--marigold);
+  transform: scale(1.5);
+}
+
+/* ===================== SECTION DIVIDER ===================== */
+.divider {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 1px;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--marigold-dark) 30%, var(--marigold) 50%, var(--marigold-dark) 70%, transparent);
+  opacity: 0.4;
+}
+
+/* papel picado — see improved version below */
+
+/* ===================== IMAGE PLACEHOLDERS ===================== */
+figure {
+  margin: 2.5rem 0;
+}
+
+.img-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(232, 137, 12, 0.04) 0%, rgba(74, 25, 66, 0.06) 100%);
+  border: 1px solid rgba(232, 137, 12, 0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(232, 137, 12, 0.03) 0%, transparent 70%);
+}
+
+.img-placeholder span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+figcaption {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* full-bleed variant */
+.full-bleed {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: 100vw;
+}
+
+.full-bleed .img-placeholder {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  aspect-ratio: 21 / 9;
+}
+
+/* ===================== TABLES ===================== */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0 2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+thead th {
+  background: var(--marigold-dark);
+  color: var(--bg);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+tbody td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(232, 137, 12, 0.08);
+  color: var(--bone);
+  vertical-align: top;
+}
+
+tbody tr {
+  background: rgba(232, 137, 12, 0.02);
+  transition: background 0.2s;
+}
+
+tbody tr:hover {
+  background: rgba(232, 137, 12, 0.06);
+}
+
+tbody td:first-child {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ===================== LISTS ===================== */
+ul, ol {
+  margin: 1rem 0 1.5rem 1.2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li::marker {
+  color: var(--marigold);
+}
+
+/* ===================== PITCH / SPECIAL TEXT ===================== */
+.pitch {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--bone);
+  line-height: 1.8;
+  border-left: 3px solid var(--marigold);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ===================== DESIGN PRINCIPLES ===================== */
+.principle {
+  margin: 3rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--marigold);
+}
+
+.principle-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--marigold);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.principle p {
+  color: var(--bone);
+  line-height: 1.8;
+}
+
+.principle.thesis {
+  border-left-width: 4px;
+  padding-left: 2rem;
+  margin: 4rem 0;
+}
+
+.principle.thesis .principle-name {
+  font-size: 2rem;
+}
+
+/* ===================== BONE LIST ITEMS ===================== */
+.bone-entry {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(232, 137, 12, 0.03);
+  border-radius: 4px;
+  border: 1px solid rgba(232, 137, 12, 0.08);
+}
+
+.bone-entry h4 {
+  margin-top: 0;
+  color: var(--marigold);
+  font-family: var(--font-display);
+}
+
+.bone-entry p {
+  color: var(--bone);
+  margin-bottom: 0;
+}
+
+/* ===================== TIER HEADER ===================== */
+.tier-header {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-top: 3rem;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+/* ===================== FALLING PETALS (HERO) ===================== */
+.petal {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: var(--marigold);
+  border-radius: 50% 50% 50% 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.3px);
+}
+
+.petal.alt { background: #d4760a; }
+.petal.deep { background: #c06808; }
+
+@keyframes petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, -20px) rotate(0deg) scale(0.7);
+  }
+  10% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), calc(100vh + 40px)) rotate(var(--spin)) scale(0.4);
+  }
+}
+
+.petal.falling {
+  animation: petal-fall var(--dur) ease-in forwards;
+}
+
+/* Static scattered petals for section breaks */
+.petal-scatter {
+  position: relative;
+  height: 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.petal-scatter .sp {
+  position: absolute;
+  width: 8px;
+  height: 11px;
+  background: var(--marigold);
+  border-radius: 50% 50% 50% 0;
+  opacity: 0.2;
+}
+
+/* ===================== PETAL LIST MARKERS ===================== */
+ul.petal-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1.4rem;
+}
+
+ul.petal-list > li {
+  position: relative;
+}
+
+ul.petal-list > li::before {
+  content: '';
+  position: absolute;
+  left: -1.2rem;
+  top: 0.55em;
+  width: 7px;
+  height: 10px;
+  background: var(--marigold);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-30deg);
+  opacity: 0.7;
+}
+
+/* ===================== CANDLE FLAMES ===================== */
+.candle-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin: 1.5rem 0 0;
+  pointer-events: none;
+}
+
+.candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.candle-body {
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(to bottom, #e8dcc8, #c9a84c);
+  border-radius: 1px;
+}
+
+.candle-flame {
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 80%, #ffe4a0 0%, #E8890C 50%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  top: 0;
+  animation: flame-flicker 1.5s ease-in-out infinite alternate;
+  filter: blur(0.4px);
+}
+
+.candle-flame::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(circle, rgba(232, 137, 12, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.candle:nth-child(2) .candle-flame { animation-delay: -0.4s; animation-duration: 1.8s; }
+.candle:nth-child(3) .candle-flame { animation-delay: -0.9s; animation-duration: 1.3s; }
+.candle:nth-child(4) .candle-flame { animation-delay: -1.2s; animation-duration: 1.6s; }
+.candle:nth-child(5) .candle-flame { animation-delay: -0.6s; animation-duration: 2s; }
+
+@keyframes flame-flicker {
+  0% { transform: scaleX(1) scaleY(1) translateY(0); opacity: 0.9; }
+  25% { transform: scaleX(0.85) scaleY(1.1) translateY(-1px); opacity: 1; }
+  50% { transform: scaleX(1.1) scaleY(0.9) translateY(0.5px); opacity: 0.85; }
+  75% { transform: scaleX(0.9) scaleY(1.05) translateY(-0.5px); opacity: 0.95; }
+  100% { transform: scaleX(1.05) scaleY(0.95) translateY(0); opacity: 0.9; }
+}
+
+/* candle glow behind section h2 */
+h2 {
+  position: relative;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  width: 200px;
+  height: 60px;
+  transform: translateY(-50%);
+  background: radial-gradient(ellipse, rgba(232, 137, 12, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===================== IMPROVED PAPEL PICADO ===================== */
+.papel-picado {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 32px;
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.papel-picado::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--marigold) 20%, var(--marigold) 80%, transparent);
+  opacity: 0.35;
+}
+
+.papel-picado::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5%;
+  right: 5%;
+  height: 28px;
+  opacity: 0.12;
+  background:
+    conic-gradient(from 135deg at 10px 0px, transparent 25%, var(--marigold) 25%, var(--marigold) 50%, transparent 50%) 0 0 / 20px 14px repeat-x,
+    conic-gradient(from 135deg at 10px 0px, transparent 25%, var(--purple-light) 25%, var(--purple-light) 50%, transparent 50%) 10px 14px / 20px 14px repeat-x;
+}
+
+/* ===================== HERO CANDLE GLOW ===================== */
+.hero-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-glow .glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 137, 12, 0.07) 0%, transparent 70%);
+  animation: glow-pulse 4s ease-in-out infinite alternate;
+}
+
+.hero-glow .glow-orb:nth-child(1) { width: 400px; height: 400px; top: 20%; left: 10%; animation-delay: 0s; }
+.hero-glow .glow-orb:nth-child(2) { width: 300px; height: 300px; top: 40%; right: 8%; animation-delay: -1.5s; animation-duration: 5s; }
+.hero-glow .glow-orb:nth-child(3) { width: 250px; height: 250px; bottom: 15%; left: 30%; animation-delay: -3s; animation-duration: 6s; }
+
+@keyframes glow-pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+/* ===================== OFRENDA CANDLES ===================== */
+.ofrenda-candles {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.8rem;
+  max-width: var(--max-w);
+  margin: 1rem auto;
+  padding: 0 2rem;
+  pointer-events: none;
+  position: relative;
+}
+
+/* Tea light */
+.tea-light {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.tea-light .tl-cup {
+  width: 22px;
+  height: 10px;
+  background: linear-gradient(to bottom, #c9956a, #a07048);
+  border-radius: 0 0 4px 4px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.tea-light .tl-cup::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  right: -1px;
+  height: 3px;
+  background: linear-gradient(to bottom, #d4a878, #b88860);
+  border-radius: 2px 2px 0 0;
+}
+
+.tea-light .tl-wax {
+  width: 14px;
+  height: 4px;
+  background: radial-gradient(ellipse at 50% 30%, #ffe8c0, #e8c890);
+  border-radius: 50%;
+  margin-bottom: -1px;
+  position: relative;
+}
+
+.tea-light .tl-flame {
+  width: 6px;
+  height: 10px;
+  background: radial-gradient(ellipse at 50% 70%, #fff8e0 0%, #ffe080 30%, #e8890c 60%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  animation: tl-flicker 1.2s ease-in-out infinite alternate;
+}
+
+.tea-light .tl-flame::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  width: 26px;
+  height: 24px;
+  background: radial-gradient(circle, rgba(255, 224, 128, 0.2) 0%, rgba(232, 137, 12, 0.08) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tea-light:nth-child(2) .tl-flame { animation-delay: -0.4s; animation-duration: 1.5s; }
+.tea-light:nth-child(3) .tl-flame { animation-delay: -0.8s; animation-duration: 1.0s; }
+.tea-light:nth-child(4) .tl-flame { animation-delay: -0.2s; animation-duration: 1.7s; }
+.tea-light:nth-child(5) .tl-flame { animation-delay: -1.0s; animation-duration: 1.3s; }
+
+@keyframes tl-flicker {
+  0% { transform: scaleX(1) scaleY(1) translateY(0); opacity: 0.85; }
+  30% { transform: scaleX(0.8) scaleY(1.15) translateY(-0.5px); opacity: 1; }
+  60% { transform: scaleX(1.1) scaleY(0.85) translateY(0.3px); opacity: 0.8; }
+  100% { transform: scaleX(0.9) scaleY(1.05) translateY(-0.3px); opacity: 0.95; }
+}
+
+/* Pillar candle */
+.pillar-candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.pillar-candle .pc-body {
+  width: 14px;
+  background: linear-gradient(to right, #e8c870, #dab850, #e8c870);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.pillar-candle .pc-body.tall { height: 34px; }
+.pillar-candle .pc-body.med { height: 24px; }
+.pillar-candle .pc-body.short { height: 16px; }
+
+.pillar-candle .pc-body::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: radial-gradient(ellipse at 50% 50%, #ffe8c0 0%, #e8c870 100%);
+  border-radius: 50%;
+}
+
+.pillar-candle .pc-wick {
+  width: 1px;
+  height: 4px;
+  background: #333;
+}
+
+.pillar-candle .pc-flame {
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 70%, #fff8e0 0%, #ffe080 25%, #e8890c 55%, rgba(200, 80, 0, 0.3) 80%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: tl-flicker 1.4s ease-in-out infinite alternate;
+}
+
+.pillar-candle .pc-flame::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -14px;
+  width: 36px;
+  height: 34px;
+  background: radial-gradient(circle, rgba(255, 224, 128, 0.15) 0%, rgba(232, 137, 12, 0.06) 40%, transparent 70%);
+  border-radius: 50%;
+}
+
+.pillar-candle:nth-child(2) .pc-flame { animation-delay: -0.6s; animation-duration: 1.6s; }
+.pillar-candle:nth-child(3) .pc-flame { animation-delay: -1.1s; }
+.pillar-candle:nth-child(4) .pc-flame { animation-delay: -0.3s; animation-duration: 1.8s; }
+
+/* Ambient glow under the candle group */
+.ofrenda-candles::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 20%;
+  right: 20%;
+  height: 16px;
+  background: radial-gradient(ellipse, rgba(232, 137, 12, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===================== PAPEL PICADO BANNERS ===================== */
+.banner-string {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 60px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* The string line */
+.banner-string::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 137, 12, 0.3) 10%, rgba(232, 137, 12, 0.3) 90%, transparent);
+}
+
+.banner-flag {
+  position: absolute;
+  top: 4px;
+  width: 42px;
+  height: 50px;
+  border-radius: 1px;
+  transform-origin: top center;
+  overflow: hidden;
+}
+
+/* Scalloped bottom edge */
+.banner-flag::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: -2px;
+  right: -2px;
+  height: 12px;
+  background:
+    radial-gradient(circle 5px at 5px 0px, transparent 4.5px, currentColor 5px) 0 0 / 10px 12px repeat-x;
+  color: inherit;
+  filter: brightness(0) saturate(0) opacity(0);
+}
+
+/* Cut-out pattern — diamond shapes */
+.banner-flag::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--bg);
+  opacity: 0.45;
+  border-radius: 1px;
+}
+
+/* Scalloped bottom via mask — real approach using clip-path */
+.banner-flag {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 85%,
+    93% 100%, 86% 85%, 79% 100%, 72% 85%, 65% 100%, 58% 85%, 51% 100%,
+    44% 85%, 37% 100%, 30% 85%, 23% 100%, 16% 85%, 9% 100%, 0% 85%
+  );
+}
+
+/* Second cut-out circle */
+.banner-flag .b-hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+  opacity: 0.4;
+}
+
+/* Banner color palette */
+.banner-flag.c-marigold { background: rgba(232, 137, 12, 0.25); }
+.banner-flag.c-purple { background: rgba(107, 45, 107, 0.25); }
+.banner-flag.c-teal { background: rgba(60, 160, 150, 0.22); }
+.banner-flag.c-pink { background: rgba(200, 70, 100, 0.22); }
+.banner-flag.c-gold { background: rgba(201, 168, 76, 0.22); }
+
+/* Gentle sway */
+.banner-flag {
+  animation: banner-sway 4s ease-in-out infinite alternate;
+}
+
+.banner-flag:nth-child(2) { animation-delay: -0.6s; animation-duration: 4.5s; }
+.banner-flag:nth-child(3) { animation-delay: -1.2s; animation-duration: 3.8s; }
+.banner-flag:nth-child(4) { animation-delay: -1.8s; animation-duration: 5s; }
+.banner-flag:nth-child(5) { animation-delay: -2.5s; animation-duration: 4.2s; }
+.banner-flag:nth-child(6) { animation-delay: -0.3s; animation-duration: 4.8s; }
+.banner-flag:nth-child(7) { animation-delay: -1.5s; animation-duration: 3.5s; }
+.banner-flag:nth-child(8) { animation-delay: -2.0s; animation-duration: 4.6s; }
+.banner-flag:nth-child(9) { animation-delay: -0.9s; animation-duration: 3.9s; }
+
+@keyframes banner-sway {
+  0% { transform: rotate(-1.5deg); }
+  100% { transform: rotate(1.5deg); }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.3rem; }
+  .content-wrap { padding: 0 1.2rem; }
+  section { padding: 3rem 0; }
+  .side-nav { display: none; }
+  .bone-entry { padding: 1rem; }
+  table { font-size: 0.82rem; }
+  thead th, tbody td { padding: 0.5rem 0.6rem; }
+  .petal { display: none; }
+  .petal:nth-child(-n+10) { display: block; }
+  .candle-row { gap: 1.5rem; }
+  .ofrenda-candles { gap: 1rem; }
+  .banner-string { height: 45px; }
+  .banner-flag { width: 30px; height: 38px; }
+  .hero-glow .glow-orb { opacity: 0.5; }
+  h2::before { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal, .candle-flame, .hero-glow .glow-orb, .tl-flame, .pc-flame, .banner-flag { animation: none !important; }
+  .petal { display: none !important; }
+  .candle-flame, .tl-flame, .pc-flame { opacity: 0.7; transform: none; }
+  .banner-flag { transform: none; }
+}
+
+/* ===================== MOBILE NAV ===================== */
+.mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+  background: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(232, 137, 12, 0.3);
+  color: var(--marigold);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(17, 16, 16, 0.96);
+  padding: 4rem 2rem 2rem;
+  overflow-y: auto;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-nav.open { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.mobile-nav a {
+  display: block;
+  padding: 0.6rem 0;
+  color: var(--bone);
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(232, 137, 12, 0.06);
+  text-decoration: none;
+}
+
+.mobile-nav a:hover, .mobile-nav a.active { color: var(--marigold); }
+
+@media (max-width: 768px) {
+  .mobile-nav-toggle { display: flex; align-items: center; justify-content: center; }
+}
+
+/* ===================== PRINT ===================== */
+@media print {
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .hero {
+    min-height: auto;
+    background: none;
+    padding: 2rem 0;
+  }
+  .hero-title {
+    color: #1a1a1a;
+    text-shadow: none;
+    font-size: 3rem;
+  }
+  .hero-subtitle, .hero-meta { color: #444; }
+  .hero-scroll, .side-nav, .mobile-nav-toggle, .mobile-nav { display: none !important; }
+  .hero::before, .hero-glow, .petal, .candle-row, .petal-scatter, .ofrenda-candles, .banner-string { display: none !important; }
+  body::after { display: none; }
+  h2::before { display: none; }
+  section {
+    opacity: 1 !important;
+    transform: none !important;
+    padding: 1.5rem 0;
+    break-inside: avoid;
+  }
+  h2 { color: #1a1a1a; font-size: 1.6rem; }
+  h3 { font-size: 1.2rem; color: #1a1a1a; }
+  h4 { color: #333; }
+  .content-wrap { max-width: 100%; padding: 0; }
+  .divider::before, .papel-picado { display: none; }
+  .img-placeholder {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    page-break-inside: avoid;
+  }
+  .img-placeholder span { color: #666; }
+  table { font-size: 9pt; }
+  thead th { background: #ddd; color: #1a1a1a; }
+  tbody td { border-color: #ddd; color: #333; }
+  .pitch, .principle { border-left-color: #999; }
+  .principle-name, .bone-entry h4 { color: #1a1a1a; }
+  .bone-entry { background: #f9f9f9; border-color: #ddd; }
+  .full-bleed { margin-left: 0; margin-right: 0; width: 100%; }
+  a { color: #1a1a1a; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== SIDE NAV ===================== -->
+<nav class="side-nav" aria-label="Section navigation">
+  <a href="#overview"><span class="nav-label">Overview</span><span class="nav-dot"></span></a>
+  <a href="#characters"><span class="nav-label">Characters</span><span class="nav-dot"></span></a>
+  <a href="#mechanics"><span class="nav-label">Mechanics</span><span class="nav-dot"></span></a>
+  <a href="#camera"><span class="nav-label">Camera</span><span class="nav-dot"></span></a>
+  <a href="#village"><span class="nav-label">Village</span><span class="nav-dot"></span></a>
+  <a href="#bones"><span class="nav-label">Bones</span><span class="nav-dot"></span></a>
+  <a href="#hazards"><span class="nav-label">Hazards</span><span class="nav-dot"></span></a>
+  <a href="#narrative"><span class="nav-label">Narrative</span><span class="nav-dot"></span></a>
+  <a href="#art"><span class="nav-label">Art</span><span class="nav-dot"></span></a>
+  <a href="#technical"><span class="nav-label">Technical</span><span class="nav-dot"></span></a>
+  <a href="#production"><span class="nav-label">Production</span><span class="nav-dot"></span></a>
+  <a href="#marketing"><span class="nav-label">Marketing</span><span class="nav-dot"></span></a>
+  <a href="#principles"><span class="nav-label">Principles</span><span class="nav-dot"></span></a>
+</nav>
+
+<!-- ===================== MOBILE NAV ===================== -->
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="toggleMobileNav()">☰</button>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#overview" onclick="closeMobileNav()">1. Game Overview</a>
+  <a href="#characters" onclick="closeMobileNav()">2. Characters</a>
+  <a href="#mechanics" onclick="closeMobileNav()">3. Core Mechanics</a>
+  <a href="#camera" onclick="closeMobileNav()">4. The Camera</a>
+  <a href="#village" onclick="closeMobileNav()">5. The Village</a>
+  <a href="#bones" onclick="closeMobileNav()">6. The Bones</a>
+  <a href="#hazards" onclick="closeMobileNav()">7. Hazards &amp; Dangers</a>
+  <a href="#narrative" onclick="closeMobileNav()">8. Emotional Arc &amp; Narrative</a>
+  <a href="#art" onclick="closeMobileNav()">9. Art Direction</a>
+  <a href="#technical" onclick="closeMobileNav()">10. Technical Architecture</a>
+  <a href="#production" onclick="closeMobileNav()">11. Production Plan</a>
+  <a href="#marketing" onclick="closeMobileNav()">12. Marketing Strategy</a>
+  <a href="#principles" onclick="closeMobileNav()">13. Design Principles</a>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="hero">
+  <!-- Ambient glow orbs -->
+  <div class="hero-glow">
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+  </div>
+  <!-- Petals injected by JS -->
+  <div class="hero-title">HUESOS</div>
+  <span class="hero-skull">☠</span>
+  <div class="hero-subtitle">The Bones of the One You Love</div>
+  <div class="candle-row" style="margin-top: 1.5rem;">
+    <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+    <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+    <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+    <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+    <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+  </div>
+  <div class="hero-meta">
+    Game Design Document<br>
+    Version 2.0 — February 2026<br>
+    Designed by Connor<br>
+    3D Isometric Action-Adventure · Solo Dev · PC/Console
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+
+<!-- Papel picado banner -->
+<div class="banner-string" aria-hidden="true">
+  <div class="banner-flag c-marigold" style="left:6%;"><span class="b-hole" style="top:22px;left:8px;"></span><span class="b-hole" style="top:16px;left:22px;"></span></div>
+  <div class="banner-flag c-teal" style="left:16%;"><span class="b-hole" style="top:20px;left:16px;"></span><span class="b-hole" style="top:28px;left:6px;"></span></div>
+  <div class="banner-flag c-purple" style="left:26%;"><span class="b-hole" style="top:18px;left:10px;"></span><span class="b-hole" style="top:24px;left:24px;"></span></div>
+  <div class="banner-flag c-pink" style="left:36%;"><span class="b-hole" style="top:22px;left:20px;"></span><span class="b-hole" style="top:14px;left:8px;"></span></div>
+  <div class="banner-flag c-gold" style="left:46%;"><span class="b-hole" style="top:20px;left:14px;"></span><span class="b-hole" style="top:28px;left:26px;"></span></div>
+  <div class="banner-flag c-marigold" style="left:56%;"><span class="b-hole" style="top:16px;left:22px;"></span><span class="b-hole" style="top:26px;left:10px;"></span></div>
+  <div class="banner-flag c-teal" style="left:66%;"><span class="b-hole" style="top:24px;left:18px;"></span><span class="b-hole" style="top:16px;left:6px;"></span></div>
+  <div class="banner-flag c-purple" style="left:76%;"><span class="b-hole" style="top:20px;left:12px;"></span><span class="b-hole" style="top:28px;left:24px;"></span></div>
+  <div class="banner-flag c-pink" style="left:86%;"><span class="b-hole" style="top:18px;left:8px;"></span><span class="b-hole" style="top:24px;left:20px;"></span></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  1. GAME OVERVIEW                                            -->
+<!-- ============================================================ -->
+<div class="petal-scatter" aria-hidden="true">
+  <span class="sp" style="left:8%; top:2px; transform:rotate(-25deg);"></span>
+  <span class="sp" style="left:22%; top:8px; transform:rotate(15deg); opacity:0.15;"></span>
+  <span class="sp" style="left:45%; top:4px; transform:rotate(-40deg);"></span>
+  <span class="sp" style="left:63%; top:10px; transform:rotate(30deg); opacity:0.12;"></span>
+  <span class="sp" style="left:78%; top:2px; transform:rotate(-15deg);"></span>
+  <span class="sp" style="left:91%; top:7px; transform:rotate(50deg); opacity:0.18;"></span>
+</div>
+<div class="papel-picado"></div>
+<section id="overview">
+<div class="content-wrap">
+
+<h2>1. Game Overview</h2>
+
+<h3>1.1 Premise</h3>
+<p>You are Fidel, a skeleton who awakens on November 1st — Día de los Muertos. The bones of your one true love, Marigold, have been stolen by grave robbers and scattered across a small village in Michoacán, Mexico. You have one day to find her bones, bring them home, and assemble her on your altar — so you can spend one last evening on earth together.</p>
+
+<p>The catch: you keep falling apart. Every impact, stumble, and collision sends your own bones flying. You never die — you just become an increasingly desperate collection of parts, scooting, hobbling, and dragging yourself through a village that is throwing the biggest party of the year and does not care about your problems.</p>
+
+<p>The twist: falling apart isn't just a setback. It's a tool. Individual body parts can be controlled independently — a skull can roll through a drain pipe, a hand can spider-crawl through a crack in a wall, a detached leg can roll off a rooftop onto a pressure plate below. The player learns to see disassembly not as failure but as strategy. You take yourself apart to reach the places your whole body can't go. You sacrifice your own wholeness to find hers.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Concept Art: Fidel — Full Body Character Concept</span></div>
+  <figcaption>Fidel, standing whole and determined. Simple clean bone geometry, hollow expressive eye sockets.</figcaption>
+</figure>
+
+<h3>1.2 The Pitch</h3>
+<div class="pitch">
+A slapstick love story about a skeleton who falls apart. No death. No violence. Just chaos, dogs, fireworks, and the funniest bad day anyone has ever had — all in the name of love. Also, you can deliberately remove your own skull and roll it through a drainpipe to scout ahead. Because love requires sacrifice, even the structural kind.
+</div>
+
+<h3>1.3 Core Pillars</h3>
+<p><strong>Premise as Mechanic:</strong> The skeleton falling apart IS the game. Damage creates new constraints which create new strategies which create comedy and tension. Deliberate disassembly turns the damage system into a puzzle-solving tool. The premise scales playfully at every level.</p>
+<p><strong>Interactive Painting:</strong> The village is a place you want to be in. Rich, layered, alive with celebration. Players should feel like they can revisit this world whenever they want — like a painting on the wall.</p>
+<p><strong>Clever, Not Powerful:</strong> The player succeeds through route knowledge, timing, risk assessment, creative use of substitutes, and the strategic disassembly of their own body. There are no weapons, no combat abilities. Just your wits, your bones, and whatever broom handle is nearby.</p>
+<p><strong>Scarcity Creates Meaning:</strong> You can only carry two bones. Every trip out and back is a calculated risk. Every bone placed on the altar is earned.</p>
+<p><strong>Earn the Ending:</strong> The entire game builds toward a single emotional moment: she opens her eyes. Everything — the comedy, the chaos, the frustration, the determination — is in service of that payoff.</p>
+
+<h3>1.4 Genre &amp; Format</h3>
+<ul>
+  <li><strong>Genre:</strong> 3D action-adventure with physics-comedy, environmental puzzle-solving, and dynamic camera</li>
+  <li><strong>Platform:</strong> PC (Steam), with console ports planned</li>
+  <li><strong>Engine:</strong> Unity (recommended for modular character systems and physics)</li>
+  <li><strong>Camera:</strong> Dynamic elevated perspective (~45–60°) that adapts to context — wide for full-body navigation, tight and low for individual part control</li>
+  <li><strong>Session Length:</strong> 3–5 hours first playthrough; 90 minutes skilled replay</li>
+  <li><strong>Price Point:</strong> $18–20 USD</li>
+  <li><strong>Rating:</strong> E10+ (comic mischief, thematic elements)</li>
+</ul>
+
+<h3>1.5 Comparable Titles</h3>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Title</th><th>What It Shares</th><th>How Huesos Differs</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Untitled Goose Game</td><td>Physical comedy, non-violent antagonism, small-town setting</td><td>Deeper mechanical systems, emotional narrative, persistent progression, part-switching puzzles</td></tr>
+    <tr><td>Death's Door</td><td>Elevated camera, tight world design, soul/death themes</td><td>No combat, physics-based damage, humor-forward, body-part puzzle mechanics</td></tr>
+    <tr><td>Octodad</td><td>Awkward body physics as core mechanic</td><td>More strategic, less pure chaos; deliberate disassembly adds puzzle depth</td></tr>
+    <tr><td>Hades</td><td>Isometric-style camera, run-based structure, hub returns</td><td>No roguelike elements; fixed world, linear bone progression</td></tr>
+    <tr><td>Brothers: A Tale of Two Sons</td><td>Controlling multiple characters simultaneously for puzzles</td><td>You ARE the multiple characters — controlling your own detached parts</td></tr>
+    <tr><td>Coco (film)</td><td>Day of the Dead setting, skeleton protagonist, love story</td><td>Interactive medium; the fumbling physicality is uniquely game</td></tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  2. CHARACTERS                                               -->
+<!-- ============================================================ -->
+<div class="ofrenda-candles" aria-hidden="true">
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body med"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body tall"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body med"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+</div>
+<div class="papel-picado"></div>
+<section id="characters">
+<div class="content-wrap">
+
+<h2>2. Characters</h2>
+
+<h3>2.1 Fidel (The Player)</h3>
+<p>A skeleton. No flesh, no costume, no accessories — just bones. His character comes entirely from posture, movement, and the player's projection onto him. When he's whole, he moves with a kind of earnest determination — upright, purposeful, a little stiff in the way skeletons are. When he's damaged, his personality emerges through how he copes: the one-legged hop, the desperate army crawl, the stubborn refusal to stop moving.</p>
+
+<p>Fidel is a puppet in the truest sense — a simple form that invites the player to project love, humor, frustration, and heroism onto him. He has a face (hollow eyes, a jaw that can express through angle and openness) and that's enough. The player will care about Fidel not because of dialogue or backstory but because they've dragged him, legless, through a field of marigold petals to get one bone home.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Character Sheet: Fidel Damage States — Whole, One Leg Missing, Both Legs Missing, Skull &amp; One Arm</span></div>
+  <figcaption>Four states of disrepair, each showing personality through posture — determination despite damage.</figcaption>
+</figure>
+
+<h3>2.2 Marigold (The Love)</h3>
+<p>We never see Marigold alive (in the fleshed sense). She exists only as an absence that slowly becomes a presence. At the start she is an empty altar. By the end she is complete — and she wakes up.</p>
+
+<p>As bones are placed, she begins to respond. An arm twitches. A ribcage rises with a faint breath. Her jaw arrives and she whispers something inaudible. These small moments are the emotional engine of the game. The player isn't just collecting items — they're watching someone come back to life, piece by piece.</p>
+
+<p>When complete, Marigold should feel like Fidel's complement — same simplicity, same puppetry, but with her own posture and presence. The final sequence of the game is the two of them together.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Concept Art: Marigold's Altar — Empty, Mid-Assembly, Complete (She Opens Her Eyes)</span></div>
+  <figcaption>The altar progression: from conspicuous absence to tender reunion.</figcaption>
+</figure>
+
+<h3>2.3 The Grave Robbers</h3>
+<p>A small crew of thieves who dig up and sell "magical" bones on the black market. They are the reason Marigold's bones are scattered across the village — they unearthed her, divided her up, and sold her piece by piece to collectors, curiosity seekers, and superstitious buyers.</p>
+
+<p>They are not violent. They are greedy, opportunistic, and when they see a walking skeleton, they see product. They want Fidel's bones too. They chase, they set traps, they steal. But they don't fight. The distinction matters: these are obstacles with personality, not enemies with health bars.</p>
+
+<p><strong>The Leader:</strong> The head grave robber should have a distinct presence. Perhaps not purely villainous — someone who genuinely believes in the magical properties of the bones and sees themselves as a provider. There could be a moment of recognition when they see what Fidel is doing. Not enough to stop them. But enough to hesitate. They hold the final bone: Marigold's skull.</p>
+
+<h3>2.4 The Villagers</h3>
+<p>The people of the village are not enemies. They are the party, and the party is indifferent to your quest. They exist in several archetypes:</p>
+<ul>
+  <li><strong>Dancers:</strong> Move in patterns through streets. Sweep Fidel up, spin him around, knock pieces loose. A conga line is a natural disaster.</li>
+  <li><strong>Drunk Partygoers:</strong> Stumble into Fidel. Lean on him. Pick up his arm thinking it's a prop. Pass out on his leg bone.</li>
+  <li><strong>Children:</strong> The most dangerous humans. Running, kicking, throwing. A soccer game in the plaza that Fidel's skull gets kicked into.</li>
+  <li><strong>Fireworks Operators:</strong> Bottle rockets that go sideways. Sparks that scatter bones. Pure chaos.</li>
+  <li><strong>Buyers/Collectors:</strong> Villagers who purchased Marigold's bones. Some might trade. Some need convincing. Some don't even know what they have.</li>
+</ul>
+
+<h3>2.5 The Animals</h3>
+<ul>
+  <li><strong>Dogs:</strong> The stars. They don't attack — they want to play. They grab bones and run, tails wagging. Chasing a joyful dog through alleys while you're missing a leg is peak Huesos.</li>
+  <li><strong>Cats:</strong> Knock things off ledges. Swat your hand while you're climbing. Pure spite, zero malice.</li>
+  <li><strong>Chickens:</strong> Chaos agents. Underfoot at the worst moments. They cause chain reactions, not direct damage.</li>
+  <li><strong>Donkeys:</strong> Kick when spooked. One solid hit sends pieces flying. Not aggressive, just startled.</li>
+  <li><strong>Crows/Seagulls:</strong> Airborne thieves. They swoop and grab small bones — fingers, toes. Their nest contains stolen treasures including some of her bones.</li>
+</ul>
+
+<figure>
+  <div class="img-placeholder"><span>Gameplay Moment: The Dog Chase — A joyful dog with a bone, Fidel hobbling in pursuit</span></div>
+  <figcaption>The dog is happy. The skeleton is determined.</figcaption>
+</figure>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  3. CORE MECHANICS                                           -->
+<!-- ============================================================ -->
+<div class="petal-scatter" aria-hidden="true">
+  <span class="sp" style="left:5%; top:6px; transform:rotate(20deg);"></span>
+  <span class="sp" style="left:18%; top:2px; transform:rotate(-35deg); opacity:0.14;"></span>
+  <span class="sp" style="left:35%; top:10px; transform:rotate(45deg);"></span>
+  <span class="sp" style="left:55%; top:3px; transform:rotate(-20deg); opacity:0.16;"></span>
+  <span class="sp" style="left:72%; top:8px; transform:rotate(10deg);"></span>
+  <span class="sp" style="left:88%; top:4px; transform:rotate(-50deg); opacity:0.13;"></span>
+</div>
+<div class="papel-picado"></div>
+<section id="mechanics">
+<div class="content-wrap">
+
+<h2>3. Core Mechanics</h2>
+
+<h3>3.1 The Damage System — "Falling Apart"</h3>
+<p>Fidel's skeleton is composed of 12–15 discrete body parts, each modeled as an independent piece attached at socket joints. When Fidel takes an impact — from a collision, a fall, a dog tackle, a fireworks explosion — one or more parts detach and scatter physically into the environment.</p>
+
+<p>There is no health bar. There is no death. There is only the state of your skeleton.</p>
+
+<p>Each missing part affects gameplay:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Body Part</th><th>Effect When Missing</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Skull</td><td>Screen goes dark; navigate by sound only</td><td>Most dramatic loss; highest recovery priority</td></tr>
+    <tr><td>Jaw</td><td>Cannot interact with certain NPCs/objects</td><td>Subtle but meaningful</td></tr>
+    <tr><td>Ribcage</td><td>Remaining parts held loosely; cascade damage increases</td><td>Makes everything worse</td></tr>
+    <tr><td>Left/Right Arm</td><td>Carry capacity reduced by one; reduced interaction</td><td>Directly impacts bone retrieval</td></tr>
+    <tr><td>Left/Right Hand</td><td>Cannot grip small objects or climb</td><td>Fingers are separate small bones</td></tr>
+    <tr><td>Pelvis</td><td>Upper and lower body disconnect; crawling only</td><td>Catastrophic but rare</td></tr>
+    <tr><td>Left/Right Upper Leg</td><td>Hobbling; speed reduced</td><td>Common early damage</td></tr>
+    <tr><td>Left/Right Lower Leg</td><td>Cannot walk; hopping or dragging</td><td>Pairs with upper leg for full limb loss</td></tr>
+    <tr><td>Left/Right Foot</td><td>Unstable footing; slip on surfaces more easily</td><td>Subtle debuff</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Damage cascades. Losing your ribcage makes every remaining connection weaker — subsequent hits detach more parts. A fully intact Fidel might lose one bone from a dog tackle. A Fidel missing his ribcage might lose three. This creates a natural difficulty curve within each run: the longer you're out and the more damage you've taken, the more precarious everything becomes.</p>
+
+<figure class="full-bleed">
+  <div class="img-placeholder"><span>Gameplay Moment: The Scatter — Fidel exploding into pieces after a fireworks hit, bones arcing across the plaza</span></div>
+  <figcaption>The camera pulls wide to show where everything lands.</figcaption>
+</figure>
+
+<h3>3.2 Intentional Disassembly — "Take Yourself Apart"</h3>
+<p>This is the mechanic that transforms Huesos from a physics-comedy into a genuine puzzle game. At any time, the player can deliberately detach one of Fidel's body parts and switch control to it. Each part has its own movement vocabulary, its own capabilities, and its own relationship to the environment. The player learns to see disassembly not as failure but as the primary tool for solving problems.</p>
+
+<p>The core interaction is simple: select a body part, detach it, control it independently. Switch between your main body and any detached parts freely. Reattach by bringing the part back into contact with the appropriate socket. The depth comes from what each part can do alone and how multiple detached parts can work together.</p>
+
+<h4>3.2.1 Part Movement Vocabulary</h4>
+<p>Each body part type has distinct movement when controlled independently:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Part</th><th>Solo Movement</th><th>Unique Capabilities</th><th>Limitations</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Skull</td><td>Rolls freely in any direction; fastest solo piece</td><td>Fits through grates, drain pipes, small gaps; can scout rooms; spherical shape navigates curved surfaces</td><td>Cannot carry anything, cannot climb, cannot interact with objects, cannot open doors</td></tr>
+    <tr><td>Arm (with hand)</td><td>Drags itself slowly; can grip ledges and pull along surfaces</td><td>Reaches across gaps, flips switches, turns keys, grips and manipulates objects, spider-crawls along shelves</td><td>Very slow movement; limited to surfaces it can grip; vulnerable to falls</td></tr>
+    <tr><td>Hand/Fingers</td><td>Spider-crawls; tiny and slow</td><td>Fits through smallest cracks and gaps; can flip switches, press buttons, turn keys, manipulate small objects</td><td>Extremely slow; almost no force; easily displaced by wind or water</td></tr>
+    <tr><td>Leg (femur)</td><td>Rolls directionally; can strafe on flat surfaces</td><td>Can roll off edges onto lower platforms; provides weight for pressure plates; kick objects when connected to foot</td><td>Cannot climb; limited directional control; tends to roll away on slopes</td></tr>
+    <tr><td>Ribcage/Torso</td><td>Rocks back and forth; can tip itself off edges</td><td>Heavy — activates weight-based puzzles; serves as connector for other parts; can shield smaller parts</td><td>Very slow; awkward; limited independent utility</td></tr>
+    <tr><td>Pelvis</td><td>Wobbles and tips; minimal independent movement</td><td>Weight and stability; can wedge into gaps as a brace or doorstop</td><td>Barely mobile alone; primarily useful as structural anchor</td></tr>
+  </tbody>
+</table>
+</div>
+
+<figure>
+  <div class="img-placeholder"><span>Gameplay Moment: Skull rolling through a drainpipe — the world at skull-scale, light at the far end</span></div>
+  <figcaption>The pipe is dimly lit, cobwebs visible, the skull's hollow eyes face forward.</figcaption>
+</figure>
+
+<figure>
+  <div class="img-placeholder"><span>Gameplay Moment: Hand spider-crawling on a shelf, reaching for a lever</span></div>
+  <figcaption>Seen from almost ground level — shelf edges become cliffs, table legs become columns.</figcaption>
+</figure>
+
+<h4>3.2.2 The Switching System</h4>
+<p>The player can cycle through all currently disconnected parts and take direct control of any one at a time. Uncontrolled parts remain where they are as physics objects — they can be knocked around by the environment, stolen by dogs, or swept up by the parade. This creates real stakes for leaving parts deployed: your skull is scouting a room, but a dog could grab it while you're not controlling it.</p>
+
+<p>When switching between parts, the camera transitions smoothly to the newly controlled piece, adjusting its height, angle, and distance to match that part's scale and movement style. This transition is the connective tissue that makes the system feel cohesive rather than jarring.</p>
+
+<h4>3.2.3 Puzzle Design Vocabulary</h4>
+<p>Intentional disassembly opens an entire vocabulary of puzzle types:</p>
+<ul>
+  <li><strong>Access puzzles:</strong> A bone or switch is behind a barrier too small for the full body. Send your skull through a grate, your hand through a crack, your arm through a gap in the bars.</li>
+  <li><strong>Weight puzzles:</strong> Two pressure plates need simultaneous weight. Detach a leg, roll it onto one plate. Walk your body onto the other.</li>
+  <li><strong>Height puzzles:</strong> A bone is on a high shelf out of reach. Detach an arm, have your body toss it up. Switch to the arm, crawl to the bone, push it off the edge. Switch back to your body, catch it.</li>
+  <li><strong>Multi-step traversal:</strong> A dangerous area requires scouting. Send your skull through first to check the route. Then your arm to disable a trap. Then walk your body through safely.</li>
+  <li><strong>Cooperative self-puzzles:</strong> Your arm holds a door open while your body walks through. Your leg wedges into a gear mechanism to stop it turning while your hand reaches in to grab something.</li>
+  <li><strong>Distraction puzzles:</strong> Roll your skull in one direction to draw a dog's attention. While the dog chases it, your body sneaks past to grab a bone. Switch back to the skull, escape the dog, roll home.</li>
+  <li><strong>Environmental manipulation:</strong> A detached arm can pull a lever to redirect water flow, open a gate, or trigger a mechanism from a position your full body can't reach.</li>
+</ul>
+
+<p>The key design principle is that disassembly should always feel like a creative choice, not a required solution. Most puzzles should have multiple approaches — a brute-force path using the full body (riskier, more damage) and a clever path using disassembly (slower, more strategic). Let the player discover that taking themselves apart is often the smarter option.</p>
+
+<h3>3.3 The Substitute System — "Make Do"</h3>
+<p>When a body part is missing, Fidel can pick up environmental objects and jam them into the empty socket as a temporary replacement. Substitutes restore some or all functionality of the missing part, but with altered properties.</p>
+
+<p>Substitutes interact with the disassembly system in important ways. A substitute cannot be independently controlled like a real bone — you can't switch to a broom leg and roll it through a pipe. But substitutes free up your real bones for puzzle use. Detach your real arm for a puzzle, jam a rake into the shoulder socket so you can keep moving with reduced but functional mobility while your arm is off doing its job.</p>
+
+<p>Substitutes are found throughout the village and are contextual to their location:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Location</th><th>Substitute</th><th>Replaces</th><th>Effect</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Barn</td><td>Bicycle wheel</td><td>Leg</td><td>Faster movement but harder to stop; no climbing</td></tr>
+    <tr><td>Barn</td><td>Pitchfork</td><td>Arm</td><td>Extended reach; can carry one bone wedged in tines (precarious)</td></tr>
+    <tr><td>Market</td><td>Broom handle</td><td>Leg</td><td>Stiff limping gait; stable but slow</td></tr>
+    <tr><td>Market</td><td>Basket</td><td>Hand</td><td>Can carry one extra bone; fragile</td></tr>
+    <tr><td>Cantina</td><td>Bottle</td><td>Hand</td><td>Loose grip; Fidel stumbles but is harder to knock over</td></tr>
+    <tr><td>Church</td><td>Candlestick</td><td>Arm</td><td>Lights the way in dark areas; fire risk to self</td></tr>
+    <tr><td>Streets</td><td>Jack-o'-lantern</td><td>Skull</td><td>Limited vision cone; thematically perfect</td></tr>
+    <tr><td>Streets</td><td>Bucket</td><td>Skull</td><td>Muffled sound; very limited vision; protective</td></tr>
+    <tr><td>Rooftops</td><td>Weather vane</td><td>Arm</td><td>Points toward nearest bone (compass function)</td></tr>
+    <tr><td>Festival</td><td>Giant puppet head</td><td>Skull</td><td>Full vision; NPCs react differently to you</td></tr>
+    <tr><td>Festival</td><td>Stilts</td><td>Both legs</td><td>Tall; can reach high places; very unstable</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Some substitutes are strict downgrades. Some are sidegrades. And some are accidental upgrades — creating situations where a player might intentionally lose a bone to access a better substitute. The design goal is approximately 3–5 substitutes per body slot, keeping the combinatorial complexity manageable while preserving creative depth.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Concept Art: Fidel with Substitutes — Bicycle wheel leg, broom handle leg, jack-o'-lantern skull</span></div>
+  <figcaption>Wobbling forward, carrying a single bone in his remaining real hand. Comedic but earnest.</figcaption>
+</figure>
+
+<h3>3.4 The Carry System</h3>
+<p>Fidel can carry Marigold's bones in his hands — one bone per hand, for a base capacity of two bones per trip. This is the central resource constraint of the game.</p>
+
+<p>The carry system interacts with both damage and disassembly:</p>
+<ul>
+  <li><strong>Lose an arm:</strong> Carry capacity drops to one.</li>
+  <li><strong>Lose both arms:</strong> Cannot carry bones at all. Must recover at least one arm (or substitute) before retrieving.</li>
+  <li><strong>Deliberately detach an arm for a puzzle:</strong> Carry capacity drops, but you might need that arm to reach the bone in the first place. The tension between "I need my arm to carry" and "I need my arm to reach" is a constant strategic negotiation.</li>
+  <li><strong>Substitute arm with pitchfork:</strong> Can wedge one bone in the tines, but it's precarious — drops on impact.</li>
+  <li><strong>Find a bag or wheelbarrow:</strong> Temporary carry upgrade to three or four bones, but these items can be lost or broken.</li>
+</ul>
+
+<p>If Fidel takes a hit while carrying Marigold's bones, they scatter along with his own parts. Her bones and his bones end up on the ground together, and the player must sort through them. This moment — frantically distinguishing her femur from yours while a dog closes in — is the heart of the game.</p>
+
+<h3>3.5 The Homestead</h3>
+<p>A small house at the edge of the village. Marigold's altar is here. Candles, marigold petals, papel picado. This is home.</p>
+
+<p>The homestead serves multiple functions:</p>
+<ul>
+  <li><strong>Save point:</strong> Returning home saves your progress. Bones placed on the altar are permanent.</li>
+  <li><strong>Assembly station:</strong> You place Marigold's bones here. Watching her take shape over the course of the game is the visual and emotional throughline.</li>
+  <li><strong>Recovery:</strong> Fidel's own bones regenerate when he returns home. You leave whole. (The village takes that from you quickly enough.)</li>
+  <li><strong>Orientation anchor:</strong> No matter how long the player has been away from the game, returning to the homestead immediately re-establishes the goal: look at the altar, see what's missing, head back out. The player should never feel lost after a break.</li>
+</ul>
+
+<p>As Marigold becomes more complete, the homestead changes. Her presence alters the space. An arm twitches when you enter. The ribcage rises faintly. Her jaw whispers. The home becomes more alive each time you return, rewarding the trip back with moments of connection.</p>
+
+<h3>3.6 Movement &amp; Traversal</h3>
+<p>Fidel's movement is the primary expression of his current state. When whole, he moves with brisk, purposeful strides — a skeleton on a mission. As parts are lost, movement degrades in specific, readable ways that affect gameplay and create comedy simultaneously.</p>
+
+<p>The village is designed with a hierarchy of three traversal planes:</p>
+<ul>
+  <li><strong>Street Level:</strong> The primary plane. Plazas, alleys, market stalls, the cemetery, the riverbank. Most navigation and encounters happen here.</li>
+  <li><strong>Rooftop Level:</strong> A secondary plane accessed by climbing walls, ladders, and scaffolding. Faster routes, fewer NPCs, but more environmental hazards (loose tiles, clotheslines, cats). Requires arms and at least one hand to access — or a detached arm sent up first to lower a rope.</li>
+  <li><strong>Below Level:</strong> The river, drainage channels, cellars. Bones float in water. Different movement physics. Fewer hazards but bones drift with current. Drain pipes and grates are accessible to skulls and hands, connecting below-level to street-level in ways the full body can't use.</li>
+</ul>
+
+<p>Spatial design follows a philosophy of dead ends and hard turns rather than winding paths. The village should feel like a big maze that doesn't feel like a maze — tight, purposeful spaces where every alley and courtyard matters, with shortcuts and alternate routes that reward exploration and repeat visits. Many of these shortcuts are only accessible through disassembly — gaps too small for the body but perfect for a skull or hand.</p>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  4. THE CAMERA                                               -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="camera">
+<div class="content-wrap">
+
+<h2>4. The Camera</h2>
+
+<h3>4.1 Design Philosophy</h3>
+<p>The camera in Huesos is not a fixed perspective — it is a dynamic system that expresses the player's current state. Because the player routinely switches between controlling a full skeleton, a single arm, a rolling skull, or a spider-crawling hand, the camera must adapt fluidly to serve radically different scales and movement types within the same game.</p>
+
+<p>The guiding principle: the camera's height, angle, and distance are a direct expression of how whole you are. Intact skeleton, wide and elevated. Single skull, tight and low. The camera itself tells you your state without any UI.</p>
+
+<h3>4.2 Camera Modes</h3>
+
+<p><strong>Full Body Mode (~50–60° elevated, wide):</strong> The default gameplay camera. Similar to Tunic or Death's Door — an elevated perspective that feels isometric but isn't locked. Provides the spatial awareness needed for village navigation, tracking scattered bones after damage, spotting threats, and planning routes. This is the camera most players will see most of the time.</p>
+
+<p><strong>Part Control Mode (variable, tight):</strong> When the player switches to a detached part, the camera transitions to serve that part's scale. A skull gets a low, rolling camera where the world feels larger. A hand gets an almost ground-level view where shelf edges become cliffs and table legs become columns. An arm on a ledge gets a tight side view. Each part type has a camera personality that matches its movement vocabulary.</p>
+
+<p><strong>Scatter Mode (pulled high and wide):</strong> On big impacts where multiple parts fly off, the camera pulls up and out to give a wide view of where everything landed. Holds briefly, then settles onto whichever part the player selects for control. This moment of zooming out — seeing your pieces scattered across a courtyard — is both mechanically necessary (you need to see where things went) and emotionally potent.</p>
+
+<p><strong>Assembly Mode (cinematic close-up):</strong> When placing bones on the altar at the homestead, the camera shifts to a more intimate, cinematic angle. Close on the hands placing the bone. Close on Marigold's form receiving it. This is the emotional counterweight to the chaos of the village — a quiet, controlled camera for the moments that matter most.</p>
+
+<h3>4.3 Camera Transitions</h3>
+<p>The transitions between camera modes are critical. A jarring cut will break immersion. A smooth, readable transition will make the system feel cohesive.</p>
+<ul>
+  <li><strong>Body to part:</strong> When the player detaches a part and switches to it, the camera zooms in and drops in angle over approximately 0.5–1 second. The world grows around the part. The transition should feel like "shrinking into" the smaller perspective.</li>
+  <li><strong>Part to body:</strong> When switching back to the main body, the camera pulls up and out. The reverse of the previous transition. The world shrinks back to navigable scale.</li>
+  <li><strong>Part to part:</strong> When switching between two detached parts in different locations, a brief wide shot shows both positions before zooming into the newly controlled part. This preserves spatial orientation — the player always knows where their pieces are relative to each other.</li>
+  <li><strong>Scatter:</strong> On big hits, the camera snaps wide quickly (0.2–0.3 seconds) with a slight shake. Holds for 1–2 seconds while parts settle. Then follows the player's input as they select a part to control.</li>
+</ul>
+
+<h3>4.4 Interior and Confined Spaces</h3>
+<p>When a detached part enters a confined space — a drainpipe, a cellar, a crack in a wall — the camera follows the part in rather than using cross-section or transparency effects. The player experiences the space at the part's scale: a cellar seen from skull-height, a shelf seen from hand-height. This creates a sense of intimate exploration that contrasts with the wide village views.</p>
+
+<p>For the main body in tight spaces (alleys, interiors), the camera raises slightly to prevent geometry occlusion while maintaining the elevated perspective. Walls and roofs near the camera become translucent or dissolve to preserve line of sight to the player.</p>
+
+<h3>4.5 Technical Considerations</h3>
+<p>The dynamic camera system is significantly more engineering work than a fixed isometric camera. Every space in the game needs to read from multiple angles and zoom levels. Key technical requirements:</p>
+<ul>
+  <li><strong>Collision avoidance:</strong> The camera must never clip through geometry. Smart interpolation around obstacles, with fallback positions when the ideal camera position is inside a wall.</li>
+  <li><strong>Occlusion handling:</strong> Geometry between the camera and the controlled part must dissolve, become translucent, or be culled. This needs to work dynamically as the camera moves.</li>
+  <li><strong>Smooth interpolation:</strong> All transitions must be smooth and readable. No snapping, no jitter. Easing curves should feel natural — fast at the start, settling gently into the new position.</li>
+  <li><strong>Multi-part awareness:</strong> The system must track all detached parts simultaneously and be ready to transition to any of them. A brief overview mode when switching parts helps maintain spatial awareness.</li>
+</ul>
+
+<p>This system should be prototyped in Phase 1 alongside the skeleton mechanics. If the camera doesn't feel good when following a skull through a simple test room, it needs to be solved before any world-building begins.</p>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  5. THE VILLAGE                                              -->
+<!-- ============================================================ -->
+<div class="banner-string" aria-hidden="true">
+  <div class="banner-flag c-teal" style="left:4%;"><span class="b-hole" style="top:20px;left:12px;"></span><span class="b-hole" style="top:28px;left:24px;"></span></div>
+  <div class="banner-flag c-pink" style="left:14%;"><span class="b-hole" style="top:18px;left:8px;"></span><span class="b-hole" style="top:24px;left:20px;"></span></div>
+  <div class="banner-flag c-marigold" style="left:24%;"><span class="b-hole" style="top:22px;left:16px;"></span><span class="b-hole" style="top:14px;left:6px;"></span></div>
+  <div class="banner-flag c-gold" style="left:34%;"><span class="b-hole" style="top:16px;left:22px;"></span><span class="b-hole" style="top:26px;left:10px;"></span></div>
+  <div class="banner-flag c-purple" style="left:44%;"><span class="b-hole" style="top:20px;left:14px;"></span><span class="b-hole" style="top:28px;left:26px;"></span></div>
+  <div class="banner-flag c-teal" style="left:54%;"><span class="b-hole" style="top:24px;left:18px;"></span><span class="b-hole" style="top:16px;left:6px;"></span></div>
+  <div class="banner-flag c-marigold" style="left:64%;"><span class="b-hole" style="top:18px;left:10px;"></span><span class="b-hole" style="top:26px;left:24px;"></span></div>
+  <div class="banner-flag c-pink" style="left:74%;"><span class="b-hole" style="top:22px;left:8px;"></span><span class="b-hole" style="top:14px;left:20px;"></span></div>
+  <div class="banner-flag c-gold" style="left:84%;"><span class="b-hole" style="top:20px;left:16px;"></span><span class="b-hole" style="top:28px;left:6px;"></span></div>
+</div>
+<div class="ofrenda-candles" aria-hidden="true">
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body short"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body tall"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body med"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body short"></div></div>
+</div>
+<div class="papel-picado"></div>
+<section id="village">
+<div class="content-wrap">
+
+<h2>5. The Village</h2>
+
+<h3>5.1 Setting</h3>
+<p>A small village in Michoacán, Mexico, near Lake Pátzcuaro — the spiritual heartland of Día de los Muertos. The village is compact but layered: cobblestone streets, colonial-era church, tiered rooftops, a river running along one edge, farmland on the outskirts. Every space is designed to be navigated, climbed, fallen off of, and crashed through.</p>
+
+<p>The village is not an open world. It is a tightly authored space where every building, alley, and courtyard has a purpose. Density over sprawl. The player should be able to learn the layout over the course of the game and develop preferred routes, shortcuts, and strategies. Many spaces have a dual nature — impassable to the full body but accessible to detached parts, creating a layered navigation network that rewards players who think in terms of disassembly.</p>
+
+<figure class="full-bleed">
+  <div class="img-placeholder"><span>Environment: Village Overview — Isometric establishing shot of the full village during Day of the Dead</span></div>
+  <figcaption>Cobblestone streets, colonial church, tiered rooftops, river along one edge, papel picado strung between buildings, marigold petals covering streets.</figcaption>
+</figure>
+
+<h3>5.2 Districts</h3>
+
+<h4>The Plaza</h4>
+<p>The village center. Open space surrounded by buildings, a fountain, market stalls. The safest area early on, becoming chaotic as the festival intensifies. Papel picado strung between buildings, musicians, ofrendas on every surface. This is the social hub of the village and the crossroads between most other areas.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Environment: The Plaza — Market stalls, stone fountain, papel picado overhead, musicians</span></div>
+  <figcaption>Bustling but readable — clear paths between obstacles. A tiny skeleton figure navigating through the crowd.</figcaption>
+</figure>
+
+<h4>The Alleys</h4>
+<p>Narrow passages between buildings. Dangerous because scattered bones can bounce out of sight and roll under doors. But they're the fastest routes between districts. Some alleys are shortcuts; some are dead ends with surprises. Many have small gaps, grates, and openings that only detached parts can pass through — connecting districts in ways the full body can't.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Environment: The Alleys — Tight cobblestone passages, clotheslines overhead, light spilling from doorways</span></div>
+  <figcaption>One path leads to a small gap in a wall — too small for a body but a skull could roll through.</figcaption>
+</figure>
+
+<h4>The Church &amp; Bell Tower</h4>
+<p>A vertical challenge zone. The church interior is accessible when not in service. The bell tower is a multi-stage climb with the bell itself as a periodic hazard — it rings on the hour and the vibration shakes Fidel apart if he's on the structure. Timing the climb between rings is a key puzzle. The tower interior has narrow passages where a skull can scout the route ahead.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Environment: The Church &amp; Bell Tower — Colonial church, tall bell tower with climbing routes</span></div>
+  <figcaption>The tower is imposing against a deep purple evening sky. A small skeleton figure climbs partway up.</figcaption>
+</figure>
+
+<h4>The Cemetery</h4>
+<p>Thematically central but mechanically varied. Soft ground where bones can sink if not grabbed quickly. Other skeletons may be present — friendly? Competitive? The gravestones and mausoleums create a mini-maze. During evening hours, the cemetery fills with candles and mourners, creating a dense, beautiful, hazardous environment.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Environment: The Cemetery — Hundreds of candles on graves, marigold petal carpets, mausoleums creating paths</span></div>
+  <figcaption>Warm candlelight against deep blue twilight sky. Beautiful and slightly haunting.</figcaption>
+</figure>
+
+<h4>The Barn &amp; Farmland</h4>
+<p>Open spaces on the village outskirts. Animals are the primary hazard: dogs that chase, donkeys that kick, chickens underfoot. The barn contains valuable substitutes (wheel, pitchfork) and at least one bone. Wide open sightlines mean you can see threats coming but have nowhere to hide.</p>
+
+<h4>The River</h4>
+<p>A different movement environment entirely. Bones float and drift with current. Fidel can swim (if he has arms) or float (if he doesn't — skeletons are buoyant). Losing legs is actually less punishing in water. The river connects several districts and can be used as an alternate route, but anything you drop drifts downstream. Detached parts behave differently in water — skulls float and bob, arms can paddle, legs sink slowly.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Environment: The River — Floating candles and marigold petals on the water, a skeleton reaching for a drifting bone</span></div>
+  <figcaption>Peaceful but with underlying urgency. Warm reflections on water.</figcaption>
+</figure>
+
+<h4>The Cantina</h4>
+<p>An interior space, dense and rowdy. Bar fights that aren't aimed at Fidel but catch him in crossfire. Bottles and chairs flying. Drunk patrons who interact with him unpredictably. The cantina is dangerous but social — it's where some bone buyers can be found and traded with.</p>
+
+<h4>The Grave Robber Hideout</h4>
+<p>A concealed location — perhaps a back room behind a shop, or a cellar accessed through a trapdoor. Several of Marigold's bones are stockpiled here. Infiltrating it is a major mid-game objective. The main entrance is guarded — but a skull rolled through a drainage pipe, or a hand crawled through a vent, might find another way in. Traps, guards, and the need for creative disassembly make this a signature sequence.</p>
+
+<h3>5.3 The Living Village — Time Progression</h3>
+<p>The village evolves over the course of the day. Rather than gating areas with keys or abilities, the world opens organically through the festival itself.</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Time</th><th>Village State</th><th>New Access</th><th>Mood</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Dawn</td><td>Quiet. Shopkeepers setting up. A few early risers.</td><td>Plaza, home street, cemetery</td><td>Hopeful, calm</td></tr>
+    <tr><td>Morning</td><td>Market opens. Stalls create new obstacles and paths.</td><td>Alleys open as gates unlock; market zone</td><td>Bustling, energetic</td></tr>
+    <tr><td>Midday</td><td>Church service ends. First parade route begins.</td><td>Church interior and bell tower</td><td>Crowded, loud</td></tr>
+    <tr><td>Afternoon</td><td>Cantina fills. Farmers leave gates open.</td><td>Cantina, barn, farmland</td><td>Chaotic, peak danger</td></tr>
+    <tr><td>Evening</td><td>Festival moves to cemetery and lakeside. Candles everywhere.</td><td>Lakeside vigil areas, candlelit cemetery</td><td>Beautiful, melancholy</td></tr>
+    <tr><td>Night</td><td>Village winding down. Stragglers, dying candles, darkness.</td><td>All areas accessible; visibility reduced</td><td>Urgent, bittersweet</td></tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  6. THE BONES — PROGRESSION                                  -->
+<!-- ============================================================ -->
+<div class="petal-scatter" aria-hidden="true">
+  <span class="sp" style="left:10%; top:4px; transform:rotate(-30deg);"></span>
+  <span class="sp" style="left:28%; top:9px; transform:rotate(25deg); opacity:0.17;"></span>
+  <span class="sp" style="left:42%; top:2px; transform:rotate(-45deg);"></span>
+  <span class="sp" style="left:60%; top:11px; transform:rotate(15deg); opacity:0.14;"></span>
+  <span class="sp" style="left:75%; top:5px; transform:rotate(-10deg);"></span>
+  <span class="sp" style="left:93%; top:8px; transform:rotate(40deg); opacity:0.16;"></span>
+</div>
+<div class="papel-picado"></div>
+<section id="bones">
+<div class="content-wrap">
+
+<h2>6. The Bones — Progression &amp; Challenges</h2>
+
+<h3>6.1 Structure</h3>
+<p>Marigold's skeleton consists of 22 bones (simplified from anatomical accuracy for gameplay). Each bone is a distinct objective with its own location, challenge type, and narrative beat. Bones are not randomly placed — each has a story reason for being where it is, rooted in the grave robbers' distribution network.</p>
+
+<p>The 22 bones are divided into four tiers of escalating difficulty. Early tiers teach core mechanics through play. Later tiers introduce and then require mastery of intentional disassembly.</p>
+
+<h3 class="tier-header">6.2 Tier 1: Gift Bones (Bones 1–5)</h3>
+<p>Easy to find, lightly guarded. These teach core mechanics through play, not tutorials. The player learns by doing. No disassembly required — but observant players may notice opportunities.</p>
+
+<div class="bone-entry">
+  <h4>Left Foot — The Doorstep</h4>
+  <p>Sitting on your own ofrenda when you wake up. Someone left it as a decoration. Picking it up teaches the "carry and place" mechanic with zero resistance.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Foot — The Shallow Grave</h4>
+  <p>In the cemetery, barely buried. Digging it up teaches interaction. A dog watches you from a distance — foreshadowing.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Hand — The Friendly Dog</h4>
+  <p>A dog has it but this one is gentle. Offer a stick and the dog trades. Teaches the concept of environmental problem-solving.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Hand — The Market Stall</h4>
+  <p>Buried under goods at a vendor's table. Pulling it out causes a small avalanche of pottery. The vendor yells. First encounter with NPC reactions.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Lower Leg — The Ofrenda Mix-Up</h4>
+  <p>Placed on a family's ofrenda as a "decoration." Take it when they're not looking. First light stealth moment.</p>
+</div>
+
+<h3 class="tier-header">6.3 Tier 2: Fetch Bones (Bones 6–10)</h3>
+<p>Visible but difficult to reach. Each introduces a different hazard type. The first optional disassembly opportunities appear here — clever players will discover that a detached part can reach places the full body can't.</p>
+
+<div class="bone-entry">
+  <h4>Right Lower Leg — The Rooftop</h4>
+  <p>Visible on a rooftop across the plaza. Requires climbing. Loose tiles slide underfoot. First use of the vertical plane. Alternatively, a skull rolled up a drainpipe can scout the safest climbing route.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Upper Leg — The Dancers</h4>
+  <p>In the middle of the plaza, dropped during setup for the first dance. Navigating through rehearsing dancers without getting swept up. A distraction using a rolled skull might clear a path.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Upper Leg — The Alley Chase</h4>
+  <p>A stray dog snatches it from a low wall and bolts into the alleys. A chase sequence through tight spaces.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Lower Arm — The Fireworks</h4>
+  <p>Near the fireworks staging area. Must grab it between launches. Mistiming means an explosion that scatters your parts.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Lower Arm — The River Float</h4>
+  <p>Spotted floating downstream. Chase it along the bank or jump in. First introduction to water mechanics.</p>
+</div>
+
+<h3 class="tier-header">6.4 Tier 3: Quest Bones (Bones 11–17)</h3>
+<p>Multi-step retrieval requiring combined skills. Each is a self-contained mini-adventure. Intentional disassembly becomes a key tool — many of these bones have a brute-force path and a cleverer disassembly path.</p>
+
+<div class="bone-entry">
+  <h4>Left Upper Arm — The Bell Tower</h4>
+  <p>Lodged near the bell at the top of the church tower. Climb between bell rings. The bell shakes the entire structure — time your ascent or get shaken to pieces. A skull can scout the interior, and a detached arm sent ahead can secure a grip point before the next ring.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Upper Arm — The Cantina Brawl</h4>
+  <p>A patron is using it as a back-scratcher. Retrieve it during a bar fight without getting dismantled by flying furniture.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Ribcage — The Collector's House</h4>
+  <p>A wealthy villager bought it as a "sacred relic." It's in a glass case. The front door is guarded by a large dog. But a hand crawled through a window crack can unlatch the back door from inside.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Pelvis — The Crow's Nest</h4>
+  <p>Crows stole it for their nest in a tall tree on the farmland edge. Climb the tree, deal with angry birds defending their home, get down with a large bone and no easy route.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Shoulder Blade — The Toy Sword</h4>
+  <p>A child is using it as a play weapon. Find them something better to play with. Requires exploring to find an appropriate trade item.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Shoulder Blade — The Parade Float</h4>
+  <p>Mounted as decoration on a parade float. The parade moves through the village on a set route. Board the moving float, detach the bone, get off before it carries you to the wrong end of town.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Spine — The Hideout Raid</h4>
+  <p>In the grave robbers' hideout. The main entrance is watched. But a skull through the drainage pipe finds an alternate entrance. A hand through a vent can disable a trap. The full body follows once the path is clear. Getting caught means the robbers try to disassemble you for parts.</p>
+</div>
+
+<h3 class="tier-header">6.5 Tier 4: Gauntlet Bones (Bones 18–22)</h3>
+<p>Deep in the hardest areas. These require mastery of every system — movement, substitutes, and intentional disassembly working together. The village is at peak chaos.</p>
+
+<div class="bone-entry">
+  <h4>Jaw — The Lake Bottom</h4>
+  <p>Sunk in the lake during a candlelight ceremony. Dive down, find it in murky water, surface while fighting current. At night, the only light is from floating candles above.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Left Collarbone — The Drunk's Pocket</h4>
+  <p>A drunk partygoer found it and thinks it's his lucky charm. He's wandering the village randomly. Track him, wait for him to pass out, retrieve. But he keeps waking up and moving.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Right Collarbone — The Church Roof</h4>
+  <p>On the church roof during a fireworks display. Climb the outside of the church while fireworks launch from the plaza below. Every explosion rocks the building.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Sternum — The Black Market</h4>
+  <p>Being actively sold at an illegal midnight bone auction behind the cantina. You need to disrupt the sale, grab the bone, and flee while robbers give chase through the dark village.</p>
+</div>
+
+<div class="bone-entry">
+  <h4>Skull — The Final Bone</h4>
+  <p>In the possession of the grave robber leader. The climax of the game. Retrieving it requires a full run across the village using everything you've learned — every shortcut, every route, every trick, every disassembly technique. The entire village is your tool and your obstacle.</p>
+</div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  7. HAZARDS & DANGERS                                        -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="hazards">
+<div class="content-wrap">
+
+<h2>7. Hazards &amp; Dangers</h2>
+
+<h3>7.1 Design Philosophy</h3>
+<p>Nothing in Huesos is trying to hurt Fidel. Everything hurts him anyway. The dangers are kinetic, environmental, and social — not violent. There are no enemies with health bars, no combat encounters, no weapons. Just a world in motion that is beautifully, hilariously indifferent to one skeleton's quest.</p>
+
+<p>Hazards interact with the disassembly system in both directions. They can knock you apart involuntarily (creating chaos you must recover from) and they can be bypassed through intentional disassembly (rolling a skull under a swinging gate instead of timing the full-body crossing). This dual nature means every hazard is both a threat and a puzzle.</p>
+
+<h3>7.2 Environmental Hazards</h3>
+<ul>
+  <li><strong>Rooftop Tiles:</strong> Clay tiles crack and slide. Traversing rooftops means reading which tiles are stable. A wrong step sends you sliding off the edge in pieces.</li>
+  <li><strong>The Church Bell:</strong> Rings on the hour. The vibration shakes anything on the tower structure apart. Time your climbs between rings.</li>
+  <li><strong>Candle Fire:</strong> Doesn't kill but chars bones, making them brittle. One more hit and a charred bone shatters into fragments you must collect individually.</li>
+  <li><strong>River Current:</strong> Pulls loose bones downstream. Fall apart in the water and you're chasing pieces in multiple directions.</li>
+  <li><strong>Clotheslines:</strong> Catch your skull clean off while running across rooftops. Your body keeps running for a beat before collapsing.</li>
+  <li><strong>Wet Marigold Petals:</strong> Slippery streets near the cemetery. Bones scatter beautifully on the orange carpet.</li>
+  <li><strong>Unstable Structures:</strong> Wobbly ladders, collapsing market stalls, swinging gates, rolling barrels. The village is old and everything is slightly unreliable.</li>
+</ul>
+
+<h3>7.3 The Grave Robbers As Antagonists</h3>
+<p>The robbers operate differently from environmental hazards. They are intelligent, persistent, and escalate over the course of the game.</p>
+<ul>
+  <li><strong>Traps:</strong> Nets, cages, pits covered with marigold petals. Getting caught means wriggling out of your own bones — you escape as a partial skeleton and must return for the rest before the robbers collect them.</li>
+  <li><strong>Pursuit:</strong> They chase to grab, not to fight. If caught, they start pulling bones off — stealing, not destroying. Stolen bones go to their hideout, adding to your retrieval list.</li>
+  <li><strong>Escalation:</strong> Early game, they're in the background. Mid-game, you encounter them at bone locations. Late game, they're actively hunting you. They've realized what you're doing and want to stop it.</li>
+  <li><strong>Festival Camouflage:</strong> They use the Day of the Dead celebrations as cover. Everyone's carrying skulls and bones as decorations, so the robbers move freely. The parade isn't just a party — it's camouflage for something sinister underneath.</li>
+</ul>
+
+<h3>7.4 The Parade</h3>
+<p>The parade deserves special mention as a recurring environmental event. It moves through the main streets on a set route at set times — a massive procession of marching bands, giant puppets (mojigangas), floats, and dancers. It is beautiful. It is also a wall of chaos that cuts off routes and scatters anything in its path.</p>
+
+<p>Players learn to time their crossings. The parade becomes a rhythmic obstacle that structures movement through the village, and in the late game, it can be used strategically — leading robbers into the parade's path, using the crowd as cover, riding a float to cross the village quickly. A detached skull can roll under the parade's feet where the full body would be swept away.</p>
+
+<figure class="full-bleed">
+  <div class="img-placeholder"><span>Environment: The Parade — Giant mojiganga puppets, marching band, dancers, a small skeleton trying to cross</span></div>
+  <figcaption>The parade is a wall of beautiful chaos.</figcaption>
+</figure>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  8. EMOTIONAL ARC & NARRATIVE                                -->
+<!-- ============================================================ -->
+<div class="ofrenda-candles" aria-hidden="true">
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body tall"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="tea-light"><div class="tl-flame"></div><div class="tl-wax"></div><div class="tl-cup"></div></div>
+  <div class="pillar-candle"><div class="pc-flame"></div><div class="pc-wick"></div><div class="pc-body med"></div></div>
+</div>
+<div class="papel-picado"></div>
+<section id="narrative">
+<div class="content-wrap">
+
+<h2>8. Emotional Arc &amp; Narrative</h2>
+
+<h3>8.1 The Arc</h3>
+<p>Huesos tells its story almost entirely through mechanics and environment. There is minimal text, no dialogue trees, no cutscenes in the traditional sense. The story is: you woke up, she's gone, you're going to bring her back. Everything else is told through what you do and what you see.</p>
+
+<p><strong>Act One — Hope (Dawn to Morning):</strong> Fidel awakens. The altar is empty. The village is quiet and beautiful. The first bones come easily. The mood is playful, optimistic. The player is learning the basics — movement, carrying, the first accidental damage. Disassembly hasn't been introduced yet; it will emerge naturally as the player starts losing parts and realizes they can control them.</p>
+
+<p><strong>Act Two — Struggle (Midday to Afternoon):</strong> The festival explodes. The village becomes chaotic. The bones get harder. The robbers appear. Fidel is taking real damage, limping home held together with substitutes. The player discovers intentional disassembly as a tool — the first time they realize they can send a skull through a pipe or a hand through a crack, the game transforms. But every return to the homestead shows Marigold taking shape — she twitches, she breathes, she whispers. The emotional stakes deepen as the mechanical stakes increase.</p>
+
+<p><strong>Act Three — Determination (Evening to Night):</strong> The candles are burning low. The last bones are in the hardest places. Fidel is battered but the player is skilled. They know the village, they know the rhythms, they know the shortcuts, they know how to take themselves apart and put themselves back together. The mood shifts from comedy to something more urgent and tender. The final run for her skull is the culmination of everything.</p>
+
+<p><strong>Resolution — Together:</strong> The last bone is placed. She opens her eyes. They have whatever time remains in the Day of the Dead to simply be together. Walking through the village. Watching the last fireworks. Dancing. Sitting on a hill overlooking the candlelit cemetery. The ending could scale based on how much time the player has left — more efficiency means more of this final sequence.</p>
+
+<figure>
+  <div class="img-placeholder"><span>Gameplay Moment: Carrying Bones Home at Dusk — Fidel limping along a candlelit street, homestead glowing in the distance</span></div>
+  <figcaption>One leg is a broom handle, one arm is a pitchfork. He's missing his jaw. Determined, tender, slightly comedic.</figcaption>
+</figure>
+
+<h3>8.2 Environmental Storytelling</h3>
+<p>The grave robbers' operation is visible throughout the village if you look: scratched-out grave markings, suspicious packages being exchanged during the parade, a buyer nervously displaying a bone in their home. The player pieces together what happened to Marigold not through exposition but through artifacts in the environment.</p>
+
+<p>The village itself tells the broader story of Día de los Muertos — a holiday about honoring the dead that exists alongside a black market exploiting them. This thematic tension is never stated explicitly. It's just there, in the world, for players who want to see it.</p>
+
+<h3>8.3 The Hint System</h3>
+<p>If the player gets stuck, a subtle hint system escalates naturally. Perhaps Marigold's assembled bones react — an arm points vaguely in a direction, a whisper gets slightly louder when facing the right way. Early hints are almost imperceptible. Later hints become more direct. The system should feel like she's helping you find the rest of her — not like a UI tooltip breaking immersion.</p>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  9. ART DIRECTION                                            -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="art">
+<div class="content-wrap">
+
+<h2>9. Art Direction</h2>
+
+<h3>9.1 Visual Style</h3>
+<p>Stylized low-poly 3D with painterly lighting and rich color. Not photorealistic, not cartoonish — somewhere in the territory of The Touryst or Death's Door, where simple geometry meets atmospheric lighting and strong color palettes. The Day of the Dead aesthetic is perfectly suited to this: bold patterns, saturated marigold oranges and deep purples, skull motifs, paper textures, candlelight.</p>
+
+<p>The palette should be rich and layered, punctuated with black and white contrasts. Nighttime scenes lit by candlelight and fireworks. Daytime scenes warm and golden. The village should feel like a place you'd want to hang on your wall.</p>
+
+<p>The dynamic camera creates an additional visual design consideration: environments must read well from both the elevated full-body view and the intimate ground-level part view. Cobblestones that are texture from above become terrain from skull-height. Market stalls that are navigation obstacles from the wide view become towering structures from a hand's perspective. This dual-scale readability should be considered in every environment's design.</p>
+
+<h3>9.2 Character Design</h3>
+<p>Fidel and Marigold follow the puppetry principle: simple forms that invite projection. Clean bone geometry, expressive through posture and movement rather than facial detail. But faces matter — hollow eye sockets that somehow convey emotion through camera angle and head tilt, a jaw that opens in surprise or hangs in exhaustion.</p>
+
+<p>Substitutes should be visually distinct and immediately readable from both the wide camera and the tight part-control camera. A player should be able to glance at their skeleton and instantly know: that's a bucket head, a rake arm, a wheel leg. Silhouette clarity is essential.</p>
+
+<h3>9.3 Animation Philosophy</h3>
+<p>Animation is where this game lives or dies. Frames need to breathe. The comedy depends on timing — the anticipation beat before a bone flies off, the follow-through of a skull bouncing down stairs, the moment of recognition when Fidel's headless body realizes the head is gone.</p>
+
+<p>The animation system will use a tiered approach: hand-animated base states for the most common and important configurations (full body, missing one leg, missing both legs, missing one arm, missing head, dragging), with IK blending and physics simulation handling edge cases and transitions. Each detached part also needs its own animation set for independent movement — the skull's roll, the arm's drag, the hand's spider-crawl. A dedicated motion designer with physical comedy experience is essential for this system.</p>
+
+<h3>9.4 Sound Design</h3>
+<p>Sound is half the comedy and half the emotion. Key audio signatures:</p>
+<ul>
+  <li><strong>Bone clatter:</strong> The percussive rattle of bones on cobblestone. Different surfaces produce different sounds. This is the game's signature audio.</li>
+  <li><strong>Substitute sounds:</strong> Each substitute has a distinct audio profile. The hollow thunk of a bucket skull. The metallic scrape of a wheel leg. The wooden clunk of a broom.</li>
+  <li><strong>Part-control audio:</strong> When controlling a detached part, the audio perspective shifts with the camera. A skull rolling through a drain pipe should echo and reverberate. A hand crawling on a wooden shelf should creak. The audio scale matches the visual scale.</li>
+  <li><strong>Village ambience:</strong> Layered festival audio that evolves with time of day. Distant mariachi, firecrackers, crowd murmur, church bells, river.</li>
+  <li><strong>Marigold's whispers:</strong> Faint, wordless vocalizations when placing bones. Growing clearer as she becomes more complete. The most emotionally important sound in the game.</li>
+  <li><strong>Music:</strong> Guitar-forward score that shifts from playful to urgent to tender across the three acts. Diegetic music from the festival blends with the score.</li>
+</ul>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  10. TECHNICAL ARCHITECTURE                                  -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="technical">
+<div class="content-wrap">
+
+<h2>10. Technical Architecture</h2>
+
+<h3>10.1 The Modular Skeleton System</h3>
+<p>This is the most technically complex system in the game and the single biggest engineering challenge. The player character is not one mesh but a collection of 12–15 independent parts attached at socket joints. Each socket can hold the original bone, nothing, or a substitute object. The system must render and animate any combination in real time.</p>
+
+<p>Recommended approach:</p>
+<ul>
+  <li><strong>Socket-based architecture:</strong> Each body joint is a defined socket point. Parts snap in and out. Substitutes use the same socket system with different models and constraint parameters.</li>
+  <li><strong>Damage tier animation:</strong> Rather than animating every possible combination, define 3–4 damage tiers: Intact (full locomotion), Impaired (hobbling, one limb compromised), Compromised (dragging, multiple limbs gone), Critical (minimal parts, crawling/worming). Hand-animate each tier's core locomotion, climbing, and carrying states.</li>
+  <li><strong>IK blending:</strong> Use inverse kinematics to handle transitions between tiers and edge cases. If the left leg is a wheel and the right leg is a broom, IK solves for the ground contact differently on each side.</li>
+  <li><strong>Physics integration:</strong> Detached bones are physics objects. They bounce, roll, float, and can be picked up. Substitutes inherit modified physics properties (wheel rolls further, bucket bounces differently).</li>
+</ul>
+
+<h3>10.2 The Part-Switching System</h3>
+<p>Each detached body part must function as an independent controllable entity with its own movement system, collision, and camera target. Key technical requirements:</p>
+<ul>
+  <li><strong>Independent physics bodies:</strong> Each detached part has its own rigid body, collider, and movement controller. The controller adapts based on part type — spherical rolling for skulls, surface-gripping for arms, minimal wobble for the pelvis.</li>
+  <li><strong>Part state machine:</strong> Each part tracks whether it is attached, detached-and-controlled, detached-and-idle, or detached-and-held-by-NPC. Idle parts remain as physics objects in the world and can be interacted with by the environment (stolen by dogs, carried by current, kicked by children).</li>
+  <li><strong>Smooth control transfer:</strong> Switching between parts must feel instant from an input perspective even as the camera transitions. The player should never feel like they're waiting for a transition to finish before they can act.</li>
+  <li><strong>Part inventory UI:</strong> A minimal, non-intrusive indicator showing which parts are detached, where they are relative to the controlled part, and which is currently controlled. This should be subtle — possibly a faint directional indicator rather than a full map.</li>
+</ul>
+
+<h3>10.3 Scope Management</h3>
+<p>The substitute system must be scoped tightly to remain buildable. Target: 3–5 substitutes per body slot, for approximately 30–40 total substitute objects. Each substitute needs: a 3D model, socket mounting logic, visual fitting for the dynamic camera at multiple zoom levels, modified animation parameters for its slot, a unique audio signature, and any special gameplay properties.</p>
+
+<p>The part-switching system adds scope but in a more bounded way: each part type (skull, arm, hand, leg, torso, pelvis) needs one movement controller and one camera configuration. That's approximately 6 part-control modes versus 30–40 substitutes. Prototype the part-switching alongside the skeleton system in Phase 1.</p>
+
+<p>This is the system that will consume the most development time. Prototype it first. If the skeleton doesn't feel funny and functional in a gray box room, nothing else matters.</p>
+
+<h3>10.4 Camera System</h3>
+<p>The dynamic camera is the second major technical system. It must support:</p>
+<ul>
+  <li><strong>Multiple preset configurations:</strong> Full-body elevated, skull-level rolling, hand-level crawling, arm-level gripping, scatter wide shot, assembly close-up. Each with defined angle, distance, and follow parameters.</li>
+  <li><strong>Smooth interpolation:</strong> Transitions between configurations using easing curves. Fast initial movement, gentle settle. Target 0.5–1 second for standard transitions.</li>
+  <li><strong>Collision and occlusion:</strong> Dynamic geometry dissolution or transparency when geometry blocks the view. Smart repositioning when the ideal camera position is inside a wall.</li>
+  <li><strong>Multi-target awareness:</strong> The system tracks all detached parts and provides brief overview shots when switching between parts in different locations.</li>
+</ul>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  11. PRODUCTION PLAN                                         -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="production">
+<div class="content-wrap">
+
+<h2>11. Production Plan</h2>
+
+<h3>11.1 Development Phases</h3>
+
+<h4>Phase 1 — The Skeleton Prototype (2–3 months)</h4>
+<p>Build the modular skeleton in a blank room. Parts detach, scatter with physics, can be recovered. Substitutes snap into sockets. Movement changes based on damage tier. Critically: implement intentional disassembly and part-switching. A skull must roll, an arm must crawl, a hand must spider. The dynamic camera must follow each part type at appropriate scale. If this isn't fun in gray box, stop and redesign. This phase produces a playable vertical slice of the core mechanics and the first shareable development footage.</p>
+
+<h4>Phase 2 — One Block (2–3 months)</h4>
+<p>Build the homestead and one neighborhood (the plaza and surrounding alleys). Five bones, three hazard types, the carry-and-return loop. At least one bone should require or heavily reward intentional disassembly. Prove the full gameplay cycle: leave home, navigate hazards, find bones, take damage, manage substitutes, use disassembly to solve puzzles, return home, place bones, see Marigold respond. This phase produces a playable demo and a Steam page.</p>
+
+<h4>Phase 3 — The Full Village (4–6 months)</h4>
+<p>Build all districts, all 22 bones, all hazard types, the grave robbers, the time progression system. The parade. The full emotional arc. Design disassembly puzzles for each tier. This is where most of the calendar goes. Bring on the motion designer during this phase.</p>
+
+<h4>Phase 4 — Polish &amp; Launch (2–3 months)</h4>
+<p>Sound design, music, the ending sequence, bug fixing, optimization, trailer production. Steam Next Fest demo. Streamer outreach. Launch.</p>
+
+<p>Total estimated timeline: 10–15 months for a solo developer with a motion designer joining in Phase 3.</p>
+
+<h3>11.2 Team</h3>
+<ul>
+  <li><strong>Connor — Design, Engineering, Art:</strong> Core development. Systems programming, level design, 3D modeling, texturing, lighting.</li>
+  <li><strong>Motion Designer (contract, Phase 3+):</strong> Character animation, damage tier locomotion, individual part movement animations, substitute behaviors, physical comedy timing. Must understand procedural animation and IK systems, not just cinematic keyframing.</li>
+  <li><strong>Sound Designer (contract, Phase 4):</strong> Bone clatter system, substitute audio, part-control audio perspective shifts, village ambience, Marigold's whispers. Could be same person as composer or separate.</li>
+  <li><strong>Composer (contract, Phase 4):</strong> Guitar-forward score, three-act emotional arc, integration with diegetic festival music.</li>
+  <li><strong>Trailer Editor (contract, pre-launch):</strong> The trailer almost makes itself — but professional editing will make the difference between good and viral.</li>
+</ul>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  12. MARKETING STRATEGY                                      -->
+<!-- ============================================================ -->
+<div class="papel-picado"></div>
+<section id="marketing">
+<div class="content-wrap">
+
+<h2>12. Marketing Strategy</h2>
+
+<h3>12.1 Core Insight</h3>
+<p>Huesos is a clip machine. Every run produces shareable moments: a skeleton losing both legs, jamming a bicycle wheel into one hip and a broom into the other, then wobbling across a plaza while fireworks go off and a dog chases him with his own skull. A player deliberately popping off their own skull and rolling it through a drainpipe to scout a room. The development footage IS the marketing. Start posting from Phase 1.</p>
+
+<h3>12.2 Timeline</h3>
+<p><strong>Phase 1 (Prototype):</strong> Post gray box clips on Twitter/X, TikTok, Instagram Reels, r/indiedev, r/gamedev. Short, funny, 10–15 seconds. The skeleton system and part-switching are inherently shareable even without textures. Build the indie dev community following.</p>
+
+<p><strong>Phase 2 (Demo):</strong> Launch Steam page. Begin collecting wishlists. Show the village, the Day of the Dead setting, the love story. Shift the narrative from "funny physics game" to "funny physics game that's going to make me cry." Start a Discord community.</p>
+
+<p><strong>Phase 3 (Full Build):</strong> Apply for Steam Next Fest. Release a playable demo. Begin streamer outreach to mid-tier creators (5,000–50,000 followers) who play indie games. Every streamer's playthrough will look different due to combinatorial chaos.</p>
+
+<p><strong>Pre-Launch:</strong> Professional trailer. Three-act structure: quiet emotional opening, rapid chaos montage, tender ending. Target release window in October–November to align with Day of the Dead cultural moment. This gives the game a built-in annual sales spike every fall.</p>
+
+<h3>12.3 Sales Projections</h3>
+<p>Conservative estimate: 10,000–20,000 copies in year one at $18–20. Moderate (good marketing, streamer pickup): 20,000–50,000 copies. Breakout (viral moment, major streamer): 100,000+ copies. The game has above-average viral potential due to its visual clarity, immediate concept communication, and clip-generating mechanics. Plan finances around the conservative number.</p>
+
+<h3>12.4 Funding</h3>
+<p>Recommended approach: build in public first. If after 3–4 months of posting development clips, the community response is strong (several thousand followers, consistent engagement, 5,000+ Steam wishlists), consider a Kickstarter to fund Phase 3 and the motion designer. Alternatively, launch Phase 2 as a Steam Early Access title at $10–12 and fund continued development through early sales.</p>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================ -->
+<!--  13. DESIGN PRINCIPLES                                       -->
+<!-- ============================================================ -->
+<div class="banner-string" aria-hidden="true">
+  <div class="banner-flag c-purple" style="left:8%;"><span class="b-hole" style="top:22px;left:16px;"></span><span class="b-hole" style="top:14px;left:6px;"></span></div>
+  <div class="banner-flag c-marigold" style="left:18%;"><span class="b-hole" style="top:18px;left:10px;"></span><span class="b-hole" style="top:26px;left:24px;"></span></div>
+  <div class="banner-flag c-teal" style="left:28%;"><span class="b-hole" style="top:20px;left:14px;"></span><span class="b-hole" style="top:28px;left:26px;"></span></div>
+  <div class="banner-flag c-gold" style="left:38%;"><span class="b-hole" style="top:24px;left:18px;"></span><span class="b-hole" style="top:16px;left:6px;"></span></div>
+  <div class="banner-flag c-pink" style="left:48%;"><span class="b-hole" style="top:22px;left:8px;"></span><span class="b-hole" style="top:14px;left:20px;"></span></div>
+  <div class="banner-flag c-marigold" style="left:58%;"><span class="b-hole" style="top:20px;left:12px;"></span><span class="b-hole" style="top:28px;left:24px;"></span></div>
+  <div class="banner-flag c-purple" style="left:68%;"><span class="b-hole" style="top:16px;left:22px;"></span><span class="b-hole" style="top:26px;left:10px;"></span></div>
+  <div class="banner-flag c-teal" style="left:78%;"><span class="b-hole" style="top:18px;left:8px;"></span><span class="b-hole" style="top:24px;left:20px;"></span></div>
+  <div class="banner-flag c-pink" style="left:88%;"><span class="b-hole" style="top:20px;left:16px;"></span><span class="b-hole" style="top:28px;left:6px;"></span></div>
+</div>
+<div class="petal-scatter" aria-hidden="true">
+  <span class="sp" style="left:6%; top:3px; transform:rotate(-20deg);"></span>
+  <span class="sp" style="left:15%; top:9px; transform:rotate(35deg); opacity:0.18;"></span>
+  <span class="sp" style="left:30%; top:5px; transform:rotate(-40deg);"></span>
+  <span class="sp" style="left:48%; top:11px; transform:rotate(10deg); opacity:0.15;"></span>
+  <span class="sp" style="left:62%; top:2px; transform:rotate(-25deg);"></span>
+  <span class="sp" style="left:78%; top:8px; transform:rotate(45deg); opacity:0.12;"></span>
+  <span class="sp" style="left:90%; top:5px; transform:rotate(-35deg);"></span>
+</div>
+<div class="papel-picado"></div>
+<section id="principles">
+<div class="content-wrap">
+
+<h2>13. Design Principles</h2>
+
+<div class="principle">
+  <div class="principle-name">The premise is everything.</div>
+  <p>If the skeleton system isn't fun, no amount of world-building saves the game. Prototype first, decorate later.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">Falling apart is the mechanic. Putting yourself together is the goal. Taking yourself apart is the strategy.</div>
+  <p>These three relationships to your own body — involuntary loss, determined recovery, and deliberate sacrifice — are the entire game. If any one of them doesn't feel good, the others can't carry it.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">No crutches.</div>
+  <p>No health bars, no combat, no tutorials, no text-heavy exposition. If the design needs a crutch, the premise isn't strong enough.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">Teach through play.</div>
+  <p>The player learns every mechanic by encountering it, not by reading about it. The first dog teaches bone-stealing. The first fall teaches scattering. The first substitute teaches making do. The first time you realize you can control a detached skull teaches everything.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">Scarcity creates meaning.</div>
+  <p>Two bones per trip. Limited substitutes. One day. Every constraint makes every decision matter more.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">Callbacks.</div>
+  <p>If a mechanic or location solves a problem once, reference it later in a new context. The wheel that helped in the barn should matter again at the river. The alley shortcut from early game should be critical in the final run. The skull-through-a-pipe trick from mid-game should be essential in the climax.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">The world persists.</div>
+  <p>The village should feel like it exists before Fidel wakes up and will continue after he's gone. The festival is not for him. The grave robbers are not waiting for him. He is a small, determined presence in a world that is busy with its own life.</p>
+</div>
+
+<div class="principle">
+  <div class="principle-name">Comedy serves emotion.</div>
+  <p>Every laugh makes the ending hit harder. The slapstick and the love story are not separate — they are the same thing. Fidel falling apart and putting himself back together, over and over, for her — that's funny and that's beautiful and that's the game.</p>
+</div>
+
+<div class="candle-row" aria-hidden="true" style="margin: 3rem 0 1rem;">
+  <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+  <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+  <div class="candle"><div class="candle-flame"></div><div class="candle-body"></div></div>
+</div>
+
+<div class="principle thesis">
+  <div class="principle-name">You take yourself apart for love.</div>
+  <p>The deepest thematic truth of Huesos: the mechanic of deliberate disassembly IS the metaphor. You sacrifice your own wholeness to reach her pieces. You break yourself to make her whole. That's the game, and that's the love story.</p>
+</div>
+
+<figure>
+  <div class="img-placeholder"><span>Key Art: Fidel on a cobblestone street, holding a bone to his chest, the village alive behind him, homestead glowing on the hill</span></div>
+  <figcaption>Comedy, tenderness, and determination — simultaneously.</figcaption>
+</figure>
+
+</div>
+</section>
+
+<div style="height: 6rem;"></div>
+
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+// Intersection Observer for fade-in
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// Active nav tracking
+const navLinks = document.querySelectorAll('.side-nav a');
+const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').slice(1));
+
+function updateActiveNav() {
+  let current = '';
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.4) {
+        current = id;
+      }
+    }
+  }
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateActiveNav();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// Falling petals in hero
+(function generatePetals() {
+  const hero = document.getElementById('hero');
+  if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const petalCount = window.innerWidth < 768 ? 10 : 25;
+  const classes = ['petal', 'petal alt', 'petal deep'];
+
+  for (let i = 0; i < petalCount; i++) {
+    const el = document.createElement('div');
+    el.className = classes[i % 3];
+    const left = Math.random() * 100;
+    const dur = 8 + Math.random() * 12;
+    const delay = Math.random() * 20;
+    const drift = -40 + Math.random() * 80;
+    const spin = 180 + Math.random() * 360;
+    const size = 0.6 + Math.random() * 0.6;
+
+    el.style.cssText = `
+      left: ${left}%;
+      top: -20px;
+      --dur: ${dur}s;
+      --drift: ${drift}px;
+      --spin: ${spin}deg;
+      transform: scale(${size});
+      animation: petal-fall ${dur}s ${delay}s ease-in infinite;
+      opacity: 0;
+    `;
+    el.classList.add('falling');
+    hero.appendChild(el);
+  }
+})();
+
+// Mobile nav
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.querySelector('.mobile-nav-toggle');
+  const isOpen = nav.classList.toggle('open');
+  btn.textContent = isOpen ? '✕' : '☰';
+  btn.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+}
+
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.querySelector('.mobile-nav-toggle').textContent = '☰';
+}
+</script>
+
+</body>
+</html>
