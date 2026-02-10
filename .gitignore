@@ -1,2 +1,10 @@
 .DS_Store
 .claude/
+
+# Reference images and source docs
+Character Reference/
+Set References/
+Style Ref/
+connor_game_design_profile.md
+huesos_design_document_v2.docx
+huesos_concept_art_prompts.md
